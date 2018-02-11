@@ -12,25 +12,21 @@
 
 NAME = ../libft.a
 
-DIRSRC = .
+CC = gcc
+
 DIROBJ = .
+
+DIRLIBS = ..
 
 VERSION_GET = $(shell sw_vers | grep "ProductVersion:" | grep -o "[0-9]\+\.[0-9]\+")
 SIERRA = 10.12
 EL_CAPITAN = 10.11
-
 ifeq ($(VERSION_GET), $(SIERRA))
-DIRMLX = minilibx_macos_sierra
+DIRMLX = $(DIRLIBS)/minilibx_macos_sierra
 else
-DIRMLX = minilibx_macos
+DIRMLX = $(DIRLIBS)/minilibx_macos
 endif
-
-DIRHEADER = ./includes ./$(DIRMLX)
-
-DIRLIB = .
-
-CC = gcc
-
+DIRHEADER = ./includes $(DIRMLX)
 CFLAGS = $(DIRHEADER:%=-I%) -Wall -Wextra -Werror
 
 SRC = ./calc/float_2f.c ./calc/ft_abs.c ./calc/ft_power.c ./calc/int_2d.c \
