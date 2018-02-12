@@ -18,15 +18,7 @@ DIROBJ = .
 
 DIRLIBS = ..
 
-VERSION_GET = $(shell sw_vers | grep "ProductVersion:" | grep -o "[0-9]\+\.[0-9]\+")
-SIERRA = 10.12
-EL_CAPITAN = 10.11
-ifeq ($(VERSION_GET), $(SIERRA))
-DIRMLX = $(DIRLIBS)/minilibx_macos_sierra
-else
-DIRMLX = $(DIRLIBS)/minilibx_macos
-endif
-DIRHEADER = ./includes $(DIRMLX)
+DIRHEADER = $(DIRLIBS)/includes
 CFLAGS = $(DIRHEADER:%=-I%) -Wall -Wextra -Werror
 
 SRC = ./calc/float_2f.c ./calc/ft_abs.c ./calc/ft_power.c ./calc/int_2d.c \
@@ -72,6 +64,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
+	$(RM) $(DIRHEADER)/mlx.h
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $? -o $@

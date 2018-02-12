@@ -10,39 +10,43 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ../libftprintf.a
+DIRLIBS = ..
+
+NAME = $(DIRLIBS)/libftprintf.a
+
+CC = gcc
+
+DIRLIBFT = $(DIRLIBS)/libft
 
 DIRSRC = src
 DIROBJ = obj
 
-CC = gcc
-
-DIRLIBFT = ../libft
-DIRHEADER = . $(DIRLIBFT)/includes
+DIRHEADER = $(DIRLIBS)/includes
 CFLAGS = $(DIRHEADER:%=-I%) -Wall -Wextra -Werror
 
-DIRLIB = ..
-LDFLAGS = $(DIRLIB:%=-L%)
+LDFLAGS = $(DIRLIBS:%=-L%)
 LIBS = libft.a
-LDLIBS = $(LIBNAME:lib%.a=-l%)
+LDLIBS = $(LIBS:lib%.a=-l%)
 
 SRC = c_char.c c_double.c c_int.c c_intmax.c c_long.c c_longdouble.c \
 c_longlong.c c_pointers.c c_short.c c_size_t.c c_str.c c_wchar.c characters.c \
-floats.c format.c int_display.c integers.c pointers.c printf.c read.c \
+floats.c format.c int_display.c integers.c pointers.c ft_printf.c read.c \
 strings.c type.c type_nb.c
 
 OBJ = $(SRC:%.c=$(DIROBJ)/%.o)
 
 RM = rm -f
 
-.PHONY: all clean fclean
+.PHONY: all clean fclean re
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	make -C $(DIRLIBFT)
-	ar rc $(NAME) $^
+$(NAME): $(LIBS) $(OBJ)
+	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
+
+%.a:
+	make -C $(DIRLIBS) $@
 
 $(DIROBJ)/%.o: $(DIRSRC)/%.c
 	$(shell mkdir -p $(DIROBJ))
@@ -58,3 +62,4 @@ fclean: clean
 	$(RM) -r $(DIROBJ)
 
 re: fclean all
+
