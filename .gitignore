@@ -55,4 +55,5 @@ dkms.conf
 .DS_Store
 .bak
 obj
+includes/mlx.h
 

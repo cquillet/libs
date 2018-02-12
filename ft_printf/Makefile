@@ -56,10 +56,11 @@ clean:
 	make -C $(DIRLIBFT) clean
 	$(RM) $(OBJ)
 
-fclean: clean
+fclean:
 	make -C $(DIRLIBFT) fclean
-	$(RM) $(NAME)
+	$(RM) $(OBJ)
 	$(RM) -r $(DIROBJ)
+	$(RM) $(NAME)
 
 re: fclean all
 

@@ -59,12 +59,14 @@ RM = rm -f
 
 .PHONY: all clean fclean
 
-all: $(NAME)
+all: header $(NAME)
+
+header:
+	make -C $(DIRLIBS) header
 
 $(NAME): $(OBJ)
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
-	$(RM) $(DIRHEADER)/mlx.h
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $? -o $@
