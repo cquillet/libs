@@ -6,7 +6,7 @@
 /*   By: cquillet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/06 15:37:20 by cquillet          #+#    #+#             */
-/*   Updated: 2016/11/15 20:59:55 by cquillet         ###   ########.fr       */
+/*   Updated: 2017/10/30 17:27:02 by cquillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ char	*ft_strmap(char const *s, char (*f)(char))
 	i = 0;
 	while (s[i])
 		i++;
-	alloc = (char *)malloc((i + 1) * sizeof(char));
-	if (alloc == NULL)
+	if (!(alloc = (char *)malloc((i + 1) * sizeof(char))))
 		return (NULL);
 	i = 0;
 	while (s[i])

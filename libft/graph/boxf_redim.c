@@ -6,7 +6,7 @@
 /*   By: cquillet <cquillet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 21:38:40 by cquillet          #+#    #+#             */
-/*   Updated: 2017/10/23 17:05:13 by cquillet         ###   ########.fr       */
+/*   Updated: 2017/10/29 20:02:26 by cquillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_re	boxf_big_square(t_boxf *b, int natural_way_x, int natural_way_y)
 {
 	t_re	w;
 	t_re	h;
-	
+
 	w = boxf_width(*b);
 	h = boxf_height(*b);
 	if (w > h)

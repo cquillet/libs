@@ -6,7 +6,7 @@
 /*   By: cquillet <cquillet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 18:54:51 by cquillet          #+#    #+#             */
-/*   Updated: 2017/10/24 22:33:55 by cquillet         ###   ########.fr       */
+/*   Updated: 2017/10/29 20:03:48 by cquillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,14 @@ unsigned int	spectrum_grayf(t_re value, t_re min, t_re max)
 	return ((c << 16) | (c << 8) | c);
 }
 
-unsigned int	rgb_darkerf(unsigned int color, t_re value, t_re start, t_re black)
+unsigned int	rgb_darkerf(unsigned int color, t_re value, t_re start,
+																	t_re black)
 {
 	return (rgb_betweenf(value, create_2f(start, black), color, 0x000000));
 }
 
-unsigned int	rgb_lighterf(unsigned int color, t_re value, t_re start, t_re white)
+unsigned int	rgb_lighterf(unsigned int color, t_re value, t_re start,
+																	t_re white)
 {
 	return (rgb_betweenf(value, create_2f(start, white), color, 0xFFFFFF));
 }

@@ -6,7 +6,7 @@
 /*   By: cquillet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 18:34:26 by cquillet          #+#    #+#             */
-/*   Updated: 2017/06/24 17:16:43 by cquillet         ###   ########.fr       */
+/*   Updated: 2017/10/30 17:21:23 by cquillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ char	*ft_itoa_base(int n, unsigned int base)
 	len = 0;
 	while (++len && l >= base)
 		l /= base;
-	r = (char *)malloc((len + 1) * sizeof(char));
-	if (r == NULL)
+	if (!(r = (char *)malloc((len + 1) * sizeof(char))))
 		return (NULL);
 	r[len] = '\0';
 	l = (unsigned int)(n);

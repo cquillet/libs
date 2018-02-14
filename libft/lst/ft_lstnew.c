@@ -6,7 +6,7 @@
 /*   By: cquillet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 15:55:48 by cquillet          #+#    #+#             */
-/*   Updated: 2016/11/17 11:02:21 by cquillet         ###   ########.fr       */
+/*   Updated: 2017/10/30 17:25:37 by cquillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,14 @@ t_list		*ft_lstnew(void const *content, size_t content_size)
 	unsigned char	*dst;
 	size_t			i;
 
-	l = (t_list *)malloc(sizeof(t_list));
-	if (l == NULL)
+	if (!(l = (t_list *)malloc(sizeof(t_list))))
 		return (NULL);
 	l->next = NULL;
 	l->content = NULL;
 	l->content_size = (content == 0) ? 0 : content_size;
 	if (content == 0)
 		return (l);
-	if ((dst = (unsigned char *)malloc(content_size)) == NULL)
+	if (!(dst = (unsigned char *)malloc(content_size)))
 		return (NULL);
 	src = (unsigned char *)content;
 	i = 0;

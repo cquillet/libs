@@ -25,7 +25,7 @@ t_2f			cplx_2f(t_cplx z)
 
 int				cplx_cmp(t_cplx x, t_cplx y)
 {
-	return (!(ft_absf(x.re - y.re) && ft_absf(x.im - y.im)));
+	return (!(barely_equals(x.re, y.re) && barely_equals(x.im, y.im)));
 }
 
 void			cplx_print(t_cplx z, int precision)

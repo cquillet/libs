@@ -6,7 +6,7 @@
 /*   By: cquillet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/06 16:25:01 by cquillet          #+#    #+#             */
-/*   Updated: 2016/11/10 02:52:25 by cquillet         ###   ########.fr       */
+/*   Updated: 2017/10/30 17:35:11 by cquillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ char			**ft_strsplit(char const *s, char c)
 	size_t	i;
 
 	nb_words = get_nb_words(s, c, &i);
-	split = (char **)malloc((nb_words + 1) * sizeof(char *));
-	if (split == NULL)
+	if (!(split = (char **)malloc((nb_words + 1) * sizeof(char *))))
 		return (NULL);
 	split[nb_words] = 0;
 	if (nb_words == 0)

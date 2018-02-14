@@ -6,7 +6,7 @@
 /*   By: cquillet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/06 16:09:07 by cquillet          #+#    #+#             */
-/*   Updated: 2016/11/10 02:17:49 by cquillet         ###   ########.fr       */
+/*   Updated: 2017/10/30 17:35:33 by cquillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ char	*ft_strtrim(char const *s)
 		j++;
 	while (j > i && (s[j - 1] == ' ' || s[j - 1] == '\t' || s[j - 1] == '\n'))
 		j--;
-	alloc = (char *)malloc((j - i + 1) * sizeof(char));
-	if (alloc == NULL)
+	if (!(alloc = (char *)malloc((j - i + 1) * sizeof(char))))
 		return (NULL);
 	alloc[j - i] = '\0';
 	while (j--)

@@ -26,6 +26,8 @@ SRC = ./calc/float_2f.c ./calc/ft_abs.c ./calc/ft_power.c ./calc/int_2d.c \
 ./calc/quat_ops.c ./calc/quat_vector.c ./calc/quaternion.c ./calc/scale.c \
 ./calc/tab_bin.c ./calc/vector.c ./calc/vector_ops.c \
 ./calc/complex.c ./calc/complex_ops.c ./calc/cplx_elem.c calc/polynomial.c \
+./calc/poly_math.c ./calc/poly_ops.c ./calc/poly_print.c ./calc/poly_real.c \
+./calc/poly_test.c \
 ./conv/ft_atoi.c \
 ./conv/ft_atoi_base.c ./conv/ft_itoa.c ./conv/ft_itoa_base.c \
 ./gnl/get_next_line.c ./graph/box.c ./graph/boxf.c ./graph/boxf_cplx.c \
