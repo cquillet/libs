@@ -46,12 +46,10 @@ $(NAMELIBFTPRINTF): $(NAMELIBFT)
 
 $(NAMELIBMLX): header
 	make -C $(DIRMLX)
-	$(RM) $(NAMELIBMLX)
-	ln -s $(DIRMLX)/$(NAMELIBMLX) $(NAMELIBMLX)
+	ln -fs $(DIRMLX)/$(NAMELIBMLX) $(NAMELIBMLX)
 
 header:
-	$(RM) $(DIRHEADER)/$(HEADERMLX)
-	ln -s ../$(DIRMLX)/$(HEADERMLX) $(DIRHEADER)/$(HEADERMLX)
+	ln -fs ../$(DIRMLX)/$(HEADERMLX) $(DIRHEADER)/$(HEADERMLX)
 
 clean:
 	make -C $(DIRLIBFT) clean
