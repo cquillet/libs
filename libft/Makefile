@@ -6,7 +6,7 @@
 #    By: cquillet <cquillet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/12 17:39:08 by cquillet          #+#    #+#              #
-#    Updated: 2018/02/10 17:02:25 by cquillet         ###   ########.fr        #
+#    Updated: 2018/03/12 12:04:18 by cquillet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,13 +21,13 @@ DIRLIBS = ..
 DIRHEADER = $(DIRLIBS)/includes
 CFLAGS = $(DIRHEADER:%=-I%) -Wall -Wextra -Werror
 
-SRC = ./calc/float_2f.c ./calc/ft_abs.c ./calc/ft_power.c ./calc/int_2d.c \
-./calc/int_3d.c ./calc/matrix_func.c ./calc/matrix_ops.c \
-./calc/quat_ops.c ./calc/quat_vector.c ./calc/quaternion.c ./calc/scale.c \
-./calc/tab_bin.c ./calc/vector.c ./calc/vector_ops.c \
-./calc/complex.c ./calc/complex_ops.c ./calc/cplx_elem.c calc/polynomial.c \
-./calc/poly_math.c ./calc/poly_ops.c ./calc/poly_print.c ./calc/poly_real.c \
-./calc/poly_test.c \
+SRC = ./calc/float_2f.c ./math/ft_abs.c ./math/ft_power.c ./calc/int_2d.c \
+./calc/int_3d.c ./math/matrix_func.c ./math/matrix_ops.c \
+./math/quat_ops.c ./math/quat_vector.c ./math/quaternion.c ./calc/scale.c \
+./calc/tab_bin.c ./math/vector.c ./math/vector_ops.c \
+./math/complex.c ./math/complex_ops.c ./math/cplx_elem.c math/polynomial.c \
+./math/poly_math.c ./math/poly_ops.c ./math/poly_print.c ./math/poly_real.c \
+./math/poly_test.c \
 ./conv/ft_atoi.c \
 ./conv/ft_atoi_base.c ./conv/ft_itoa.c ./conv/ft_itoa_base.c \
 ./gnl/get_next_line.c ./graph/box.c ./graph/boxf.c ./graph/boxf_cplx.c \
