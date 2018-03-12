@@ -6,7 +6,7 @@
 /*   By: cquillet <cquillet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/31 16:07:58 by cquillet          #+#    #+#             */
-/*   Updated: 2018/02/10 17:56:42 by cquillet         ###   ########.fr       */
+/*   Updated: 2018/03/12 11:10:46 by cquillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int			get_string(va_list ap, t_format *f)
 {
 	char	*s;
 
+	if (f->precision_defined && f->precision == 0)
+		return (0);
 	s = va_arg(ap, char *);
 	if (s == NULL)
 		return (let_str_null(f));
