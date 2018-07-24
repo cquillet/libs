@@ -1,12 +1,13 @@
 # libs
 
-#### Abstract
+### Abstract
 This repo contains libraries that are necessary for :
 * [`fillit`](https://github.com/cquillet/fillit)
 * [`fdf`](https://github.com/cquillet/fdf)
 * [`fractol`](https://github.com/cquillet/fractol)
 
-#### Content
+
+### Content
 * includes : header files
 * libft : generates `libft.a`, it contains :
 
@@ -35,13 +36,14 @@ This repo contains libraries that are necessary for :
 
     Here is a [markdown-formated manpage](https://github.com/qst0/ft_libgfx/blob/master/man_mlx.md) thanks to [qst0](https://github.com/qst0) 🙏
 
-#### Usage
+
+### Usage
 Suppose you want to clone the projects in a directory named `dir` :
 
 * `dir/`
-  * `fdf` -> do `make` in this directory to compile `fdf`
-  * `fillit` -> do `make` in this directory to compile `fillit`
-  * `fractol` -> do `make` in this directory to compile `fractol`
+  * `fdf` -> do `make` in this directory to compile [`fdf`](https://github.com/cquillet/fdf)
+  * `fillit` -> do `make` in this directory to compile [`fillit`](https://github.com/cquillet/fillit)
+  * `fractol` -> do `make` in this directory to compile [`fractol`](https://github.com/cquillet/fractol)
   * `libs` -> do `make re` in this directory to recompile `libs` if you have compilation issues with the other projects
   
-Do not put `libs` in other projects' directories 
+Do not clone or move `libs` folder in other projects' directories 
