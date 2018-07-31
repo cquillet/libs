@@ -7,7 +7,7 @@ This repo contains libraries that are necessary for :
 * [`fractol`](https://github.com/cquillet/fractol)
 
 
-### Content
+### Contents
 * includes : header files
 * libft : generates `libft.a`, it contains :
 
