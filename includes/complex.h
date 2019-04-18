@@ -6,7 +6,7 @@
 /*   By: cquillet <cquillet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 18:11:00 by cquillet          #+#    #+#             */
-/*   Updated: 2017/10/25 16:54:27 by cquillet         ###   ########.fr       */
+/*   Updated: 2019/04/02 15:23:46 by cquillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@
 #  define TYPEDEF_CPLX
 
 typedef long double t_re;
-typedef long double t_im;
+//typedef long double t_im;
 
 # endif
 
 typedef struct	s_cplx
 {
 	t_re		re;
-	t_im		im;
+	t_re		im;
 }				t_cplx;
 
-t_cplx			create_complex(t_re re, t_im im);
+t_cplx			create_complex(t_re re, t_re im);
 t_cplx			cplx_conj(t_cplx z);
 t_re			cplx_mod(t_cplx z);
 t_re			cplx_mod2(t_cplx z);

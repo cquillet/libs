@@ -6,7 +6,7 @@
 /*   By: cquillet <cquillet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/18 14:21:14 by cquillet          #+#    #+#             */
-/*   Updated: 2017/10/22 18:34:08 by cquillet         ###   ########.fr       */
+/*   Updated: 2019/04/04 16:12:57 by cquillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,3 @@
 # define MOUSE_ROLL_BACK 5
 
 #endif
-
-/*
-** CUSTOM
-*/
-
-# ifndef BUTTON_PRESS
-#  define BUTTON_PRESS 4
-# endif
-
-# ifndef BUTTON_RELEASE
-#  define BUTTON_RELEASE 5
-# endif
-
-# ifndef MOUSE_MOVE
-#  define MOUSE_MOVE 6
-# endif

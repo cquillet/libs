@@ -6,7 +6,7 @@
 /*   By: cquillet <cquillet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/28 17:18:41 by cquillet          #+#    #+#             */
-/*   Updated: 2017/10/22 19:18:02 by cquillet         ###   ########.fr       */
+/*   Updated: 2019/04/04 15:47:11 by cquillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,5 @@ t_pixel				create_pixel(int x, int y, unsigned int color);
 t_line				create_line(t_pixel p1, t_pixel p2);
 void				print_pixel_info(t_pixel p);
 int					valid_pixel(t_pixel p, int width, int height);
-
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tjarross <tjarross@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/06 17:39:20 by tjarross          #+#    #+#             */
-/*   Updated: 2017/10/22 18:33:20 by cquillet         ###   ########.fr       */
+/*   Updated: 2019/04/04 16:11:50 by cquillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,15 +132,3 @@
 # define KEY_PAD_DOT		65
 
 #endif
-
-/*
-** CUSTOM
-*/
-
-# ifndef KEY_PRESS
-#  define KEY_PRESS 2
-# endif
-
-# ifndef KEY_RELEASE
-#  define KEY_RELEASE 3
-# endif

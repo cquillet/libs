@@ -6,7 +6,7 @@
 /*   By: cquillet <cquillet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 21:35:05 by cquillet          #+#    #+#             */
-/*   Updated: 2017/10/23 19:14:38 by cquillet         ###   ########.fr       */
+/*   Updated: 2019/04/04 15:40:20 by cquillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ int				pix_in_box(t_box b, t_pixel p);
 int				box_redim(t_box *b, t_pixel p);
 int				box_big_square(t_box *b, int natural_way_x, int natural_way_y);
 
-t_boxf			create_boxf(t_re x_min, t_re x_max, t_im y_min, t_im y_max);
+t_boxf			create_boxf(t_re x_min, t_re x_max, t_re y_min, t_re y_max);
 t_re			boxf_width(t_boxf b);
-t_im			boxf_height(t_boxf b);
+t_re			boxf_height(t_boxf b);
 t_2f			boxf_center(t_boxf b);
 
 int				t2f_in_boxf(t_boxf b, t_2f p);

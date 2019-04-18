@@ -6,7 +6,7 @@
 /*   By: cquillet <cquillet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 10:50:44 by cquillet          #+#    #+#             */
-/*   Updated: 2017/10/28 22:32:02 by cquillet         ###   ########.fr       */
+/*   Updated: 2019/04/04 16:04:49 by cquillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,17 @@
 #  define BROWN_MOUTAIN 0x660000
 # endif
 
-typedef struct	s_color
+typedef union			u_col
 {
-	char		alpha;
-	char		r;
-	char		g;
-	char		b;
-}				t_color;
+	unsigned int		rgba;
+	struct
+	{
+		unsigned char	b;
+		unsigned char	g;
+		unsigned char	r;
+		unsigned char	a;
+	};
+}						t_col;
 
 unsigned int	color_from_wavelength(double wavelength);
 

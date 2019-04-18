@@ -6,7 +6,7 @@
 /*   By: cquillet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 11:40:42 by cquillet          #+#    #+#             */
-/*   Updated: 2018/02/10 16:53:28 by cquillet         ###   ########.fr       */
+/*   Updated: 2019/04/09 20:48:59 by cquillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,8 @@
 # include <fcntl.h>
 # include <limits.h>
 
-# ifndef TYPEDEF_CPLX
-#  define TYPEDEF_CPLX
-
-typedef long double t_re;
-typedef long double t_im;
-
-# endif
-
-# ifndef MARGIN_ERROR
-#  define MARGIN_ERROR (t_re)0.000001
+# ifndef TYPEDEF_RE_AS
+#  include "type_re_as_double.h"
 # endif
 
 # define COL_INIT "\033[0m"

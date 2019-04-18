@@ -6,7 +6,7 @@
 /*   By: cquillet <cquillet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/27 17:20:30 by cquillet          #+#    #+#             */
-/*   Updated: 2017/10/23 16:20:05 by cquillet         ###   ########.fr       */
+/*   Updated: 2019/04/04 16:14:44 by cquillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,6 @@
 
 # ifndef WIN_HEIGTH
 #  define WIN_HEIGTH (1440 / 2)
-# endif
-
-# ifndef CLOSE_EVENT
-#  define CLOSE_EVENT 17
 # endif
 
 typedef struct	s_win

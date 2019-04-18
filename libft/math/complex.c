@@ -6,7 +6,7 @@
 /*   By: cquillet <cquillet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/10 19:27:24 by cquillet          #+#    #+#             */
-/*   Updated: 2017/10/23 16:57:54 by cquillet         ###   ########.fr       */
+/*   Updated: 2019/04/04 15:39:28 by cquillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "math.h"
 #include "libft.h"
 
-t_cplx			create_complex(t_re re, t_im im)
+t_cplx			create_complex(t_re re, t_re im)
 {
 	t_cplx	z;
 

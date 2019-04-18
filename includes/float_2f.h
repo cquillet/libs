@@ -6,7 +6,7 @@
 /*   By: cquillet <cquillet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 20:12:49 by cquillet          #+#    #+#             */
-/*   Updated: 2017/10/23 17:02:18 by cquillet         ###   ########.fr       */
+/*   Updated: 2019/04/02 16:11:08 by cquillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #  define TYPEDEF_CPLX
 
 typedef long double t_re;
-typedef long double t_im;
+//typedef long double t_im;
 
 # endif
 

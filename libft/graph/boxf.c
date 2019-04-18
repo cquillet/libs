@@ -6,7 +6,7 @@
 /*   By: cquillet <cquillet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 21:38:40 by cquillet          #+#    #+#             */
-/*   Updated: 2017/10/23 17:05:13 by cquillet         ###   ########.fr       */
+/*   Updated: 2019/04/04 15:40:54 by cquillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_re	boxf_width(t_boxf b)
 	return (b.x_max - b.x_min);
 }
 
-t_im	boxf_height(t_boxf b)
+t_re	boxf_height(t_boxf b)
 {
 	return (b.y_max - b.y_min);
 }

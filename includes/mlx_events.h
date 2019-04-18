@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_abs.c                                           :+:      :+:    :+:   */
+/*   mlx_events.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cquillet <cquillet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/28 20:29:38 by cquillet          #+#    #+#             */
-/*   Updated: 2019/04/09 21:01:11 by cquillet         ###   ########.fr       */
+/*   Created: 2019/04/04 16:10:57 by cquillet          #+#    #+#             */
+/*   Updated: 2019/04/04 17:17:07 by cquillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef MLX_EVENTS_H
+# define MLX_EVENTS_H
 
-int			ft_abs(int a)
-{
-	return (a < 0 ? -a : a);
-}
+# define KEY_PRESS 2
+# define KEY_RELEASE 3
+# define BUTTON_PRESS 4
+# define BUTTON_RELEASE 5
+# define MOUSE_MOVE 6
+# define EXPOSE_EVENT 12
+# define CLOSE_EVENT 17
+
+#endif
