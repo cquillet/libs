@@ -6,7 +6,7 @@
 /*   By: cquillet <cquillet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/28 17:55:53 by cquillet          #+#    #+#             */
-/*   Updated: 2017/10/23 17:12:46 by cquillet         ###   ########.fr       */
+/*   Updated: 2019/04/15 18:25:44 by cquillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,23 @@
 #  define TYPEDEF_CPLX
 
 typedef long double t_re;
-typedef long double t_im;
 
 # endif
 
 typedef struct	s_vector
 {
-	t_re		x;
-	t_re		y;
-	t_re		z;
+	union {
+		t_re	x;
+		t_re	r;
+	};
+	union {
+		t_re	y;
+		t_re	g;
+	};
+	union {
+		t_re	z;
+		t_re	b;
+	};
 }				t_vector;
 
 t_vector		create_vector(t_re x, t_re y, t_re z);
