@@ -6,7 +6,7 @@
 /*   By: cquillet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 11:40:42 by cquillet          #+#    #+#             */
-/*   Updated: 2019/04/09 20:48:59 by cquillet         ###   ########.fr       */
+/*   Updated: 2019/04/19 18:21:07 by cquillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,6 @@
 # include <string.h>
 # include <fcntl.h>
 # include <limits.h>
-
-# ifndef TYPEDEF_RE_AS
-#  include "type_re_as_double.h"
-# endif
 
 # define COL_INIT "\033[0m"
 # define COL_BLACK "\033[30m"
@@ -128,7 +124,6 @@ char				*ft_itoa_base(int n, unsigned int base);
 int					ft_power(int a, int exp);
 char				*ft_replace(const char *s, const char *o, const char *n);
 int					ft_abs(int a);
-t_re				ft_absf(t_re a);
 
 int					get_next_line(const int fd, char **line);
 
@@ -137,8 +132,15 @@ char				*ft_strmset(int c, size_t n);
 void				ft_putcenter(const char *s, int width, int c);
 int					ft_lenchar(int c);
 
-int					barely_zero(t_re a);
-int					barely_equals(t_re a, t_re b);
+/*
+**
+** in type_re.h
+**
+** int					barely_zero(t_re a);
+** int					barely_equals(t_re a, t_re b);
+** t_re				ft_absf(t_re a);
+**
+**/
 
 int					ft_printf(const char *fmt, ...);
 

@@ -6,21 +6,17 @@
 /*   By: cquillet <cquillet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 16:26:59 by cquillet          #+#    #+#             */
-/*   Updated: 2019/04/12 17:15:40 by cquillet         ###   ########.fr       */
+/*   Updated: 2019/04/19 20:41:18 by cquillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector4.h"
 #include <math.h>
 
-t_vector4		err4()
+t_vector4		err4(t_vector4 v)
 {
-
-	t_vector4	z;
-
-	z.type = NONE4;
-	z.err = 1;
-	return (z);
+	v.err = 1;
+	return (v);
 }
 
 static t_vector4	create4(t_type4 t, t_re x1, t_re x2, t_re x3, t_re x4)
@@ -38,12 +34,12 @@ static t_vector4	create4(t_type4 t, t_re x1, t_re x2, t_re x3, t_re x4)
 
 t_vector4		zero4(t_type4 t)
 {
-	return (create4(t, 0., 0., 0., 0.));
+	return (create4(t, RE_ZER0, RE_ZER0, RE_ZER0, RE_ZER0));
 }
 
 t_vector4		one4(t_type4 t)
 {
-	return (create4(t, 1., 1., 1., 1.));
+	return (create4(t, RE_ONE, RE_ONE, RE_ONE, RE_ONE));
 }
 
 t_vector2		unit2(t_type t)
@@ -63,7 +59,7 @@ t_vector4		quat4(t_re r, t_re i, t_re j, t_re k)
 
 t_vector2		poly3(t_re a3, t_re a2, t_re a1, t_re a0)
 {
-	return (create2(POLY2, a3, a2, a1, a0));
+	return (create2(POLY2, a0, a1, a2, a3));
 }
 
 t_vector4		color4(t_re r, t_re g, t_re b, t_re a)
@@ -97,7 +93,7 @@ t_vector4		box4(t_re x_min, t_re x_max, t_re y_min, t_re y_max);
 
 t_vector4		scalar4(t_vector4 v, t_re scalar)
 {
-	if (scalar == 0.f)
+	if (scalar == RE_ZER0)
 		return zero4(v.type);
 	else if (v.err != 0)
 		return err4();
@@ -199,12 +195,12 @@ t_re			det2x2(t_vector4 m)
 
 t_vector4		normalized4(t_vector4 v)
 {
-	return (scalar4(v, 1.f / module4(v)));
+	return (scalar4(v, RE_ONE / module4(v)));
 }
 
 t_vector4		*normalize4(t_vector4 *v)
 {
-	*v = scalar4(*v, 1.f / module4(*v));
+	*v = scalar4(*v, RE_ONE / module4(*v));
 	return (v);
 }
 
@@ -243,35 +239,63 @@ t_vector4		map4(t_vector4 v, double (*f)(double))
 
 t_vector4		vect4e1()
 {
-	return (vect4(1.f, 0.f, 0.f, 0.f));
+	return (vect4(RE_ONE, RE_ZER0, RE_ZER0, RE_ZER0));
 }
 
 t_vector4		vect4e2()
 {
-	return (vect4(0.f, 1.f, 0.f, 0.f));
+	return (vect4(RE_ZER0, RE_ONE, RE_ZER0, RE_ZER0));
 }
 
 t_vector4		vect4e3()
 {
-	return (vect4(0.f, 0.f, 1.f, 0.f));
+	return (vect4(RE_ZER0, RE_ZER0, RE_ONE, RE_ZER0));
 }
 
 t_vector4		vect4e4()
 {
-	return (vect4(0.f, 0.f, 0.f, 1.f));
+	return (vect4(RE_ZER0, RE_ZER0, RE_ZER0, RE_ONE));
 }
 
+/*
+** v ^ 0 returns 1-vector always without error
+** v ^ 1 returns v
+** v ^ (-n) returns (1 / v) ^ n
+*/
+
+t_vector4		pow4(t_vector4 v, int n)
+{
+	t_vector4	half;
+
+	if (n == 0)
+		return (one4(v.type));
+	else if (n < 0)
+		return (barely_zero(moduleSquared4(v)) ?
+									err4(zero4(v.type)) : pow4(inv4(v), -n));
+	else if (n < 2)
+		return (v);
+	else
+	{
+		half = pow4(v, n / 2);
+		half.err = v.err;
+		if (n % 2 == 0)
+			return (mul4(half, half));
+		else
+			return (mul4(mul4(half, half), v));
+	}
+}
+//	return (create2(v.type, pow(v.x, n), pow(v.y, n)));
 /*
 ** Linear interpolaton and liner combination
 */
 
 t_vector4		lerp4(t_vector4 a, t_vector4 b, t_re t)
 {
-	return (add4(scalar4(a, 1.f - t), scalar4(b, t)));
+	return (add4(scalar4(a, RE_ONE - t), scalar4(b, t)));
 }
 /*
 t_re			lomb4(t_vector4 a, t_vector4 b, t_re t)
 {
-	return (add4(scalar4(a, 1.f - t), scalar4(b, t)));
+	return (add4(scalar4(a, RE_ONE - t), scalar4(b, t)));
 }*/
 

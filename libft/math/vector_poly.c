@@ -6,7 +6,7 @@
 /*   By: cquillet <cquillet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 17:38:43 by cquillet          #+#    #+#             */
-/*   Updated: 2019/04/08 19:27:27 by cquillet         ###   ########.fr       */
+/*   Updated: 2019/04/19 19:28:02 by cquillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
 
 t_vector3		poly3_derivative(t_vector4 p)
 {
-	return (poly2(3.f * p.a3, 2.f * p.a2, a1));
+	return (poly2(3._RE_SUFFIX * p.a3, 2._RE_SUFFIX * p.a2, a1));
 }
 
 t_vector2		poly2_derivative(t_vector3 p)
 {
-	return (poly1(2.f * p.a2, a1));
+	return (poly1(2._RE_SUFFIX * p.a2, a1));
 }
 
 t_re			poly1_derivative(t_vector2 p)
@@ -34,12 +34,12 @@ t_re			poly1_derivative(t_vector2 p)
 
 t_vector4		poly2_intregal(t_vector3 p, t_re valueForZero)
 {
-	return (poly3(p.a2 / 3.f, 0.5f * p.a1, a0, valueForZero));
+	return (poly3(p.a2 / 3._RE_SUFFIX, 0.5_RE_SUFFIX * p.a1, a0, valueForZero));
 }
 
 t_vector3		poly1_intregal(t_vector2 p, t_re valueForZero)
 {
-	return (poly2(0.5f * p.a1, a0, valueForZero));
+	return (poly2(0.5_RE_SUFFIX * p.a1, a0, valueForZero));
 }
 
 t_vector2		real_intregal(t_re p, t_re valueForZero)
@@ -63,28 +63,33 @@ t_vector2		*poly1_solve(t_vector2 p)
 
 t_vector3		downgrade4(t_vector4 v)
 {
-	if (v.type == VECT4)
-		return (vect3(v.x, v.y, v.z));
-	else if (v.type == QUAT4)
-		return (quat3(v.i, v.j, v.k));
-	else if (v.type == POLY3)
-		return (poly2(v.a2, v.a1, v.a0));
-	else if (v.type == COLOR4)
-		return (color3(v.r, v.g, v.b));
+	t_vector3	u;
+
+	u = create3(NONE3, v.x1, v.x2, v.x3);
+	u.err = v.err;
+	if (v.type == MAT2x2 || v.type == BOX4)
+		u.err = 1;
+	else if (v.type == HOMO4)
+		u.type = VECT3;
 	else
-		return (err3());
+		u.type = (t_type3)v.type;
+	return (u);
 }
 
 t_vector2		downgrade3(t_vector3 v)
 {
-	if (v.type == VECT3)
-		return (vect2(v.x, v.y));
-	else if (v.type == QUAT3)
-		return (cplx(0.f, v.i));
-	else if (v.type == POLY2)
-		return (poly1(v.a1, v.a0));
+	t_vector2	u;
+
+	if (v.type == QUAT3)
+		return (err2(cplx2(NONE3, RE_ZERO, v.x1)));
 	else
-		return (err2());
+		u = create2(NONE3, v.x1, v.x2);
+	u.err = v.err;
+	if (v.type == COLOR3)
+		u.err = 1;
+	else
+		u.type = (t_type3)v.type;
+	return (u);
 }
 
 t_re			downgrade2(t_vector2 v)
@@ -92,30 +97,31 @@ t_re			downgrade2(t_vector2 v)
 	return (v.x);
 }
 
-t_vector4		upgrade3(t_vector3 v)
+t_vector4		vect3to4(t_vector3 v)
 {
-	if (v.type == VECT3)
-		return (vect4(0.f, v.x, v.y, v.z));
-	else if (v.type == QUAT3)
-		return (quat4(0.f, v.i, v.j, v.k));
-	else if (v.type == POLY2)
-		return (poly3(1.f, v.a2, v.a1, v.a0));
-	else if (v.type == COLOR3)
-		return (color4(v.r, v.g, v.b, 0.f));
-	else
-		return (create4(NONE4, v.x1, v.x2, v.x3, 0.f));
+	return (upgrade3(v, (v.type == POLY2) ? RE_ONE : RE_ZERO));
+}
+
+t_vector4		upgrade3(t_vector3 v, t_re x4)
+{
+	t_vector4	u;
+
+	u = create4(NONE3, v.x1, v.x2, v.x3, x4);
+	u.err = v.err;
+	u.type = (t_type4)v.type;
+	return (u);
 }
 
 t_vector3		upgrade2(t_vector2 v)
 {
 	if (v.type == VECT2)
-		return (vect3(v.x, v.y, 0.f));
+		return (vect3(v.x, v.y, RE_ZERO));
 	else if (v.type == CPLX)
-		return (quat3(v.im, 0.f, 0.f));
+		return (quat3(v.im, RE_ZERO, RE_ZERO));
 	else if (v.type == POLY1)
-		return (poly2(1.f, v.a1, v.a0));
+		return (poly2(RE_ONE, v.a1, v.a0));
 	else
-		return (create3(NONE3, v.x1, v.x2, 0.f));
+		return (create3(NONE3, v.x1, v.x2, RE_ZERO));
 }
 
 t_vector2		dimBox4(t_vector4 box)
@@ -125,7 +131,8 @@ t_vector2		dimBox4(t_vector4 box)
 
 t_vector2		center4(t_vector4 box)
 {
-	return (scalar2(vect2(box.x_min + box.x_max, b.y_min + b.y_max), 0.5f));
+	return (scalar2(vect2(box.x_min + box.x_max, b.y_min + b.y_max),
+															0.5_RE_SUFFIX));
 }
 
 /*
@@ -168,28 +175,34 @@ t_vector4		mulPoly1By2(t_vector2 p1, t_vector3 p2)
 }
 
 t_vector2		*poly2_solve(t_vector3 p)
+{
+	return (NULL);
+}
 
 t_vector2		*poly3_solve(t_vector4 p)
+{
+	return (NULL);
+}
 
 int				poly2_solve(t_vector3 p, t_vector2 *solutions)
 {
 	t_re		discri;
 	t_re		root;
 
-	if (p.a2 == 0.f)
+	if (p.a2 == RE_ZERO)
 		return (0);
-	discri = p.a1 * p.a1 - 4.f * p.a2 * p.a1;
-	if (discri < 0.f)
+	discri = p.a1 * p.a1 - 4._RE_SUFFIX * p.a2 * p.a1;
+	if (discri < RE_ZERO)
 		return (0);
-	else if (discri == 0.f)
+	else if (discri == RE_ZERO)
 	{
 		solutions = (t_vector2 *)malloc(sizeof(t_vector2));
-		*solutions = vect2(-p.a1 / 2.f / p.a2, 0.f);
+		*solutions = vect2(-p.a1 / 2._RE_SUFFIX / p.a2, RE_ZERO);
 		return (1);
 	}
 	solutions = (t_vector2 *)malloc(sizeof(t_vector2));
 	root = (t_re)sqrt(discri);
-	*solutions = vect2((-p.a1 - root) / 2.f / p.a2,
-							(-p.a1 + root) / 2.f / p.a2);
+	*solutions = vect2((-p.a1 - root) / 2.RE_SUFFIX / p.a2,
+							(-p.a1 + root) / 2._RE_SUFFIX / p.a2);
 	return (2);
 }

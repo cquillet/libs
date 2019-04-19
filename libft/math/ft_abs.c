@@ -6,11 +6,11 @@
 /*   By: cquillet <cquillet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/28 20:29:38 by cquillet          #+#    #+#             */
-/*   Updated: 2019/04/09 21:01:11 by cquillet         ###   ########.fr       */
+/*   Updated: 2019/04/19 18:15:40 by cquillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "type_re.h"
 
 int			ft_abs(int a)
 {

@@ -6,7 +6,7 @@
 /*   By: cquillet <cquillet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 20:42:30 by cquillet          #+#    #+#             */
-/*   Updated: 2019/04/15 19:54:56 by cquillet         ###   ########.fr       */
+/*   Updated: 2019/04/19 18:14:06 by cquillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,26 @@
 ** 3.4E-4932 to 1.1E+4932
 ** 19 decimal places
 **
+** suffix: l or L
+**
 */
 
 #ifndef TYPE_RE_AS_LONG_DOUBLE_H
 # define TYPE_RE_AS_LONG_DOUBLE_H
 
-# ifndef TYPEDEF_RE_AS
-#  define TYPEDEF_RE_AS
+# ifndef __TYPEDEF_RE__
+#  define __TYPEDEF_RE__
 
 typedef long double t_re;
+
+#  define RE_ZERO 0.0L
+#  define RE_ONE 1.0L
+#  define _RE_SUFFIX L
 
 # endif
 
 # ifndef MARGIN_ERROR
-#  define MARGIN_ERROR (t_re)(1e-19)
+#  define MARGIN_ERROR 1e-19L
 # endif
 
 # include "type_re.h"

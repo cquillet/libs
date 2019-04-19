@@ -6,24 +6,33 @@
 /*   By: cquillet <cquillet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 18:14:15 by cquillet          #+#    #+#             */
-/*   Updated: 2019/04/15 16:10:06 by cquillet         ###   ########.fr       */
+/*   Updated: 2019/04/19 18:25:22 by cquillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "type_re.h"
 
 #ifndef VECTOR4_H
 # define VECTOR4_H
 
-# ifndef TYPEDEF_CPLX
-#  define TYPEDEF_CPLX
-
-typedef long double t_re;
-
-# endif
-
-# define INV_SQRT_4 0.5f
+/*
+**
+**	0	NONE
+**	1	VECT		vector
+**	2	NORM		normalized vector
+**	3	POL			vector in polar coordinates
+**	4	CPLX/QUAT	complex number / quaternion
+**	5	POLY		polynomial
+**	6	COLOR		color
+**	7	HOMO4		vector3 in homogeous coordinates
+**	8	MAT2x2		2 x 2 matrix
+**	9	BOX4		box
+**	10	PARAM4		parametric vector
+**
+*/
 
 typedef enum e_type4 { NONE4 = 0, VECT4, NORM4, POL4, QUAT4, POLY3, COLOR4,
-												MAT2x2, BOX4, PARAM4 } t_type4;
+										HOMO4, MAT2x2, BOX4, PARAM4 } t_type4;
 
 typedef struct	s_vector4
 {
@@ -32,7 +41,7 @@ typedef struct	s_vector4
 		t_re	x;
 		t_re	r;
 		t_re	m00;
-		t_re	a3;
+		t_re	a0;
 		t_re	x_min;
 	};
 	union {
@@ -42,7 +51,7 @@ typedef struct	s_vector4
 		t_re	i;
 		t_re	g;
 		t_re	m01;
-		t_re	a2;
+		t_re	a1;
 		t_re	x_max;
 	};
 	union {
@@ -52,7 +61,7 @@ typedef struct	s_vector4
 		t_re	j;
 		t_re	b;
 		t_re	m10;
-		t_re	a1;
+		t_re	a2;
 		t_re	y_min;
 	};
 	union {
@@ -61,7 +70,7 @@ typedef struct	s_vector4
 		t_re	k;
 		t_re	a;
 		t_re	m11;
-		t_re	a0;
+		t_re	a3;
 		t_re	y_max;
 	};
 	t_type4		type;

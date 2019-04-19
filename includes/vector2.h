@@ -6,21 +6,40 @@
 /*   By: cquillet <cquillet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 15:11:25 by cquillet          #+#    #+#             */
-/*   Updated: 2019/04/15 15:23:50 by cquillet         ###   ########.fr       */
+/*   Updated: 2019/04/19 18:25:31 by cquillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "type_re.h"
 
 #ifndef VECTOR2_H
 # define VECTOR2_H
 
-# ifndef TYPEDEF_CPLX
-#  define TYPEDEF_CPLX
-
-typedef long double t_re;
-
-# endif
-
-# define INV_SQRT_2 0.70710678
+/*
+**
+**				For dimensions 2, 3, 4
+**
+**	0	NONE
+**	1	VECT		vector
+**	2	NORM		normalized vector
+**	3	POL			vector in polar coordinates
+**	4	CPLX/QUAT	complex number / quaternion
+**	5	POLY		polynomial
+**
+**
+**				For dimensions 3, 4
+**
+**	6	COLOR		color
+**
+**
+**				For dimension 4 only
+**
+**	7	HOMO4		vector in homogeous coordinates
+**	8	MAT2x2		2 x 2 matrix
+**	9	BOX4		box
+**	10	PARAM4		parametric vector
+**
+*/
 
 typedef enum e_type2 { NONE2 = 0, VECT2, NORM2, POL2, CPLX, POLY1 } t_type2;
 
