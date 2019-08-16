@@ -6,7 +6,7 @@
 /*   By: cquillet <cquillet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 18:14:15 by cquillet          #+#    #+#             */
-/*   Updated: 2019/04/19 18:25:22 by cquillet         ###   ########.fr       */
+/*   Updated: 2019/08/16 16:22:59 by cquillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ t_vector4		mat2x2(t_re x1, t_re x2, t_re x3, t_re x4);
 t_vector4		box4(t_re x_min, t_re x_max, t_re y_min, t_re y_max);
 
 t_vector4		neg4(t_vector4 v);
+t_vector4		inv4(t_vector4 v);
 t_vector4		scalar4(t_vector4 v, t_re scalar);
 t_vector4		add4(t_vector4 u, t_vector4 v);
 t_vector4		sub4(t_vector4 u, t_vector4 v);

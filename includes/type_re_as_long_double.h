@@ -6,7 +6,7 @@
 /*   By: cquillet <cquillet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 20:42:30 by cquillet          #+#    #+#             */
-/*   Updated: 2019/04/19 18:14:06 by cquillet         ###   ########.fr       */
+/*   Updated: 2019/08/16 16:39:20 by cquillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,18 @@
 #ifndef TYPE_RE_AS_LONG_DOUBLE_H
 # define TYPE_RE_AS_LONG_DOUBLE_H
 
-# ifndef __TYPEDEF_RE__
-#  define __TYPEDEF_RE__
+# ifndef __TYPEDEF_RE_DEFINE__
+#  define __TYPEDEF_RE_DEFINE__
 
 typedef long double t_re;
 
 #  define RE_ZERO 0.0L
 #  define RE_ONE 1.0L
+
+#  define INV_SQRT_2 0.70710678L
+#  define INV_SQRT_3 0.57735027L
+#  define INV_SQRT_4 0.5L
+
 #  define _RE_SUFFIX L
 
 # endif
@@ -52,7 +57,7 @@ typedef long double t_re;
 # ifndef MARGIN_ERROR
 #  define MARGIN_ERROR 1e-19L
 # endif
-
+/*
 # include "type_re.h"
-
+*/
 #endif

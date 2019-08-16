@@ -6,7 +6,7 @@
 /*   By: cquillet <cquillet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 15:11:25 by cquillet          #+#    #+#             */
-/*   Updated: 2019/04/19 18:25:31 by cquillet         ###   ########.fr       */
+/*   Updated: 2019/08/16 15:24:48 by cquillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ t_vector2		neg2(t_vector2 v);
 t_vector2		add2(t_vector2 u, t_vector2 v);
 t_vector2		sub2(t_vector2 u, t_vector2 v);
 t_vector2		mul2(t_vector2 u, t_vector2 v);
-t_vector2		pow2(t_vector2 u, t_vector2 v, int power);
+t_vector2		pow2(t_vector2 u, int power);
 
 int				cmp2(t_vector2 a, t_vector2 b);
 int				cmpType2(t_vector2 a, t_vector2 b);
@@ -98,6 +98,8 @@ t_re			moduleSquared2(t_vector2 v);
 t_re			module2(t_vector2 v);
 t_re			distSquared2(t_vector2 a, t_vector2 b);
 t_re			dist2(t_vector2 a, t_vector2 b);
+t_re			prod2(t_vector2 a, t_vector2 b);
+t_re			eval2(t_vector2 p, t_re x);
 
 t_vector2		normalized2(t_vector2 v);
 t_vector2		*normalize2(t_vector2 *v);

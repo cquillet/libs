@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   type_re.c                                          :+:      :+:    :+:   */
+/*   vect_print.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cquillet <cquillet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/09 20:58:53 by cquillet          #+#    #+#             */
-/*   Updated: 2019/08/16 16:29:26 by cquillet         ###   ########.fr       */
+/*   Created: 2019/08/16 16:32:36 by cquillet          #+#    #+#             */
+/*   Updated: 2019/08/16 16:34:54 by cquillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "type_re.h"
+#ifndef VECT_PRINT_H
+# define VECT_PRINT_H
 
-t_re		ft_absf(t_re a)
-{
-	return (a < RE_ZERO ? -a : a);
-}
+# include "vector2.h"
+# include "vector3.h"
+# include "vector4.h"
 
-int			barely_zero(t_re a)
-{
-	return (ft_absf(a) < MARGIN_ERROR);
-}
+void			print2(t_vector2 v);
+void			print3(t_vector3 v);
+void			print4(t_vector4 v);
 
-int			barely_equals(t_re a, t_re b)
-{
-	return (barely_zero(a - b));
-}
+#endif

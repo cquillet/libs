@@ -6,7 +6,7 @@
 /*   By: cquillet <cquillet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 20:38:16 by cquillet          #+#    #+#             */
-/*   Updated: 2019/04/19 18:13:28 by cquillet         ###   ########.fr       */
+/*   Updated: 2019/08/16 16:39:11 by cquillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,18 @@
 #ifndef TYPE_RE_AS_FLOAT_H
 # define TYPE_RE_AS_FLOAT_H
 
-# ifndef __TYPEDEF_RE__
-#  define __TYPEDEF_RE__
+# ifndef __TYPEDEF_RE_DEFINE__
+#  define __TYPEDEF_RE_DEFINE__
 
 typedef float t_re;
 
 #  define RE_ZERO 0.0F
 #  define RE_ONE 1.0F
+
+#  define INV_SQRT_2 0.70710678F
+#  define INV_SQRT_3 0.57735027F
+#  define INV_SQRT_4 0.5F
+
 #  define _RE_SUFFIX F
 
 # endif
@@ -45,7 +50,7 @@ typedef float t_re;
 # ifndef MARGIN_ERROR
 #  define MARGIN_ERROR 0.0000001F
 # endif
-
+/*
 # include "type_re.h"
-
+*/
 #endif

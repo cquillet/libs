@@ -6,13 +6,19 @@
 /*   By: cquillet <cquillet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 19:17:12 by cquillet          #+#    #+#             */
-/*   Updated: 2019/04/04 14:41:35 by cquillet         ###   ########.fr       */
+/*   Updated: 2019/08/16 16:43:49 by cquillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
 #include "../../includes/vector2.h"
 #include "../../includes/vector3.h"
 #include "../../includes/vector4.h"
+*/
+#include "vector2.h"
+#include "vector3.h"
+#include "vector4.h"
+#include "vect_print.h"
 
 #include <stdio.h>
 

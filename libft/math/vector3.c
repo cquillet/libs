@@ -6,7 +6,7 @@
 /*   By: cquillet <cquillet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 18:23:02 by cquillet          #+#    #+#             */
-/*   Updated: 2019/04/19 19:21:30 by cquillet         ###   ########.fr       */
+/*   Updated: 2019/08/16 16:21:30 by cquillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@ static t_vector3	create3(t_type3 t, t_re x1, t_re x2, t_re x3)
 	t_vector3	v;
 
 	v.type = t;
-	v.x1 = x1;
-	v.x2 = x2;
-	v.x3 = x3;
+	v.e1 = x1;
+	v.e2 = x2;
+	v.e3 = x3;
 	v.err = 0;
 	return (v);
 }
 
 t_vector3		zero3(t_type3 t)
 {
-	return (create3(t, RE_ZER0, RE_ZER0, RE_ZER0));
+	return (create3(t, RE_ZERO, RE_ZERO, RE_ZERO));
 }
 
 t_vector3		one3(t_type3 t)
@@ -41,7 +41,7 @@ t_vector3		one3(t_type3 t)
 	return (create3(t, RE_ONE, RE_ONE, RE_ONE));
 }
 
-t_vector3		unit3(t_type t)
+t_vector3		unit3(t_type3 t)
 {
 	return (create3(t, INV_SQRT_3, INV_SQRT_3, INV_SQRT_3));
 }
@@ -56,9 +56,9 @@ t_vector3		quat3(t_re i, t_re j, t_re k)
 	return (create3(QUAT3, i, j, k));
 }
 
-t_vector2		poly2(t_re a2, t_re a1, t_re a0)
+t_vector3		poly2(t_re a2, t_re a1, t_re a0)
 {
-	return (create2(POLY2, a0, a1, a2));
+	return (create3(POLY2, a0, a1, a2));
 }
 
 t_vector3		color3(t_re r, t_re g, t_re b)
@@ -70,10 +70,9 @@ t_vector3		scalar3(t_vector3 v, t_re scalar)
 {
 	t_vector3	coeff;
 	
-	if (scalar == RE_ZER0)
+	if (barely_zero(scalar))
 		return zero3(v.type);
-	else if (v.err != 0)
-		return err3();
+	coeff.err = v.err;
 	coeff.x = scalar * v.x;
 	coeff.y = scalar * v.y;
 	coeff.z = scalar * v.z;
@@ -109,9 +108,8 @@ t_vector3		mul3(t_vector3 u, t_vector3 v)
 {
 	t_vector3	mul;
 
-	if ((mul.err = (u.err || v.err || u.type != v.type)))
-		return err3();
-	else if (u.type == VECT3 || u.type == QUAT3)
+	mul.err = (u.err || v.err || u.type != v.type);
+	if (u.type == VECT3 || u.type == QUAT3)
 	{
 		mul.x = u.y * v.z - v.y * u.z;
 		mul.y = u.z * v.x - v.z * u.x;
@@ -124,7 +122,7 @@ t_vector3		mul3(t_vector3 u, t_vector3 v)
 		mul.b = u.b * v.b;
 		mul.err = (u.type != COLOR3);
 	}
-	mul.type = mul.err ? NONE3 : u.type;
+	mul.type = u.type;
 	return (mul);
 }
 
@@ -184,9 +182,9 @@ int				cmpValues3(t_vector3 a, t_vector3 b)
 t_vector3		map3(t_vector3 v, double (*f)(double))
 {
 	return (create3(v.type, 
-			(t_re)(*f)((double)v.x1),
-			(t_re)(*f)((double)v.x2),
-			(t_re)(*f)((double)v.x3))
+			(t_re)(*f)((double)v.e1),
+			(t_re)(*f)((double)v.e2),
+			(t_re)(*f)((double)v.e3))
 			);
 }
 

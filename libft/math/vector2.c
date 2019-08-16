@@ -1,4 +1,4 @@
-/ ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   vector2.c                                          :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: cquillet <cquillet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 15:10:06 by cquillet          #+#    #+#             */
-/*   Updated: 2019/04/19 20:41:17 by cquillet         ###   ########.fr       */
+/*   Updated: 2019/08/16 16:12:32 by cquillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,17 @@ t_vector2		one2(t_type2 t)
 	return (create2(t, RE_ONE, RE_ONE));
 }
 
-t_vector2		unit2(t_type t)
+t_vector2		unit2(t_type2 t)
 {
 	return (create2(t, INV_SQRT_2, INV_SQRT_2));
 }
 
-t_vector2		v10(t_type2 t);
+t_vector2		v10(t_type2 t)
 {
 	return (create2(t, RE_ONE, RE_ZERO));
 }
 
-t_vector2		v01(t_type2 t);
+t_vector2		v01(t_type2 t)
 {
 	return (create2(t, RE_ZERO, RE_ONE));
 }
@@ -65,36 +65,37 @@ t_vector2		norm2(t_re x, t_re y)
 	t_re		m2;
 	t_re		m;
 
-	m2 = prod2(x, y);
+	m2 = x * x + y * y;
 	if (barely_equals(m2, RE_ONE))
 		return (create2(NORM2, x, y));
 	else
 	{
-		m = sprt(m2);
+		m = sqrt(m2);
 		return (create2(NORM2, x / m, y / m));
 	}
 }
 
 t_vector2		toNorm2(t_vector2 v)
 {
-	t_vector tmp;
+	t_vector2 tmp;
 
-	tmp = v;
 	if (v.type == NORM2)
 		return (v);
-	else if (v.rtype == POL2)
+	tmp = v;
+	tmp.type = NORM2;
+	if (v.type == POL2)
 	{
-
+		tmp.r = RE_ONE;
 	}
 	else
 	{
-		n = norm2(v);
-		n.err = v.err;
+		tmp = normalized2(v);
+		tmp.err = v.err;
 	}
-	return (n)
+	return (tmp);
 }
 
-t_vector2		pol2(t_re r, t_re theta);
+t_vector2		pol2(t_re r, t_re theta)
 {
 	return (create2(POL2, r, theta));
 }
@@ -147,8 +148,8 @@ t_vector2		toVect2(t_vector2 v)
 	else if (v.type == POL2)
 	{
 		tmp = v;
-		v.x = tmp.r * cos(tmp.azi)
-		v.y = tmp.r * sin(tmp.azi)
+		v.x = tmp.r * cos(tmp.azi);
+		v.y = tmp.r * sin(tmp.azi);
 		v.type = VECT2;
 		return (v);
 	}
@@ -161,14 +162,14 @@ t_vector2		scalar2(t_vector2 v, t_re scalar)
 	t_vector2	u;
 
 	if (barely_zero(scalar))
-		u = (v.type == NORM2 ? err2(v10()) : zero2(v.type);
+		u = (v.type == NORM2 ? err2(v10(v.type)) : zero2(v.type));
 	else if (v.type == NORM2)
 		u = (scalar < RE_ZERO) ? neg2(v) : v;
 	else if (v.type == POL2)
 		u = pol2(v.r * scalar, v.azi);
 	else
 		u = create2(v.type, scalar * v.x, scalar * v.y);
-	u.err = v.err
+	u.err = v.err;
 	return (u);
 }
 
@@ -225,7 +226,6 @@ t_vector2		inv2(t_vector2 v)
 		else
 			v.y = RE_ONE / v.y;
 		return (v);
-		}
 	}
 }
 
@@ -294,7 +294,9 @@ t_re			moduleSquared2(t_vector2 v)
 	if (v.type == NORM2)
 		return (RE_ONE);
 	else if (v.type == POL2)
-		return (v.r * v.r)
+		return (v.r * v.r);
+	else if (v.type == POLY1)
+		return (v.a1 * v.a1);
 	else
 		return (v.x * v.x + v.y * v.y);
 }
@@ -304,9 +306,10 @@ t_re			module2(t_vector2 v)
 	if (v.type == NORM2)
 		return (RE_ONE);
 	else if (v.type == POL2)
-		return (v.r)
-	else
-		return ((t_re)sqrt(moduleSquared2(v)));
+		return (v.r);
+	else if (v.type == POLY1)
+		return (v.a1);
+	return ((t_re)sqrt(moduleSquared2(v)));
 }
 
 t_re			distSquared2(t_vector2 a, t_vector2 b)
@@ -323,10 +326,12 @@ t_re			arg2(t_vector2 v)
 {
 	if (v.type == POL2)
 		return (v.azi);
-	else if (v.type == POLY1)
-		return (deg2(v));
+	/*else if (v.type == POLY1)
+		return (deg2(v));*/
 	else if (v.type == VECT2 || v.type == NORM2 || v.type == NONE2)
-		v.azi = atan2(tmp.y, tmp.x);
+		return (atan2(v.y, v.x));
+	else
+		return (RE_ZERO);
 }
 
 t_vector2		normalized2(t_vector2 v)
@@ -336,7 +341,10 @@ t_vector2		normalized2(t_vector2 v)
 	if (v.type == NORM2)
 		return (v);
 	else if (v.type == POL2)
-
+	{
+		v.r = RE_ONE;
+		return (v);
+	}
 	else if (barely_zero((m = module2(v))))
 		return (err2(v10(v.type)));
 	else
@@ -356,9 +364,18 @@ t_re			prod2(t_vector2 a, t_vector2 b)
 	return (a.x * b.x + a.y * b.y);
 }
 
+t_re			eval2(t_vector2 p, t_re x)
+{
+	if (p.type == POLY1)
+		return (p.a1 * x + p.a0);
+	else
+		return (RE_ZERO);
+}
+
+
 t_vector2		map2(t_vector2 v, double (*f)(double))
 {
-	vector2		tmp;
+	t_vector2	tmp;
 
 	tmp = v;
 	v.e1 = (t_re)(*f)((double)tmp.e1);
@@ -368,11 +385,11 @@ t_vector2		map2(t_vector2 v, double (*f)(double))
 
 t_vector2		mapIf2(t_vector2 v, int (*f)(double))
 {
-	vector2		tmp;
+	t_vector2		tmp;
 
 	tmp = v;
-	v.e1 = (*f)((double)tmp.e1 ? tmp.e1 : RE_ZERO);
-	v.e2 = (*f)((double) ? tmp.e2 : RE_ZERO);
+	v.e1 = barely_zero(tmp.e1) ? RE_ZERO : (*f)((double)tmp.e1);
+	v.e2 = barely_zero(tmp.e2) ? RE_ZERO : (*f)((double)tmp.e2);
 	return (v);
 }
 

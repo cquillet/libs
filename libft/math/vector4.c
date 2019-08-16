@@ -6,7 +6,7 @@
 /*   By: cquillet <cquillet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 16:26:59 by cquillet          #+#    #+#             */
-/*   Updated: 2019/04/19 20:41:18 by cquillet         ###   ########.fr       */
+/*   Updated: 2019/08/16 16:27:00 by cquillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,17 @@ static t_vector4	create4(t_type4 t, t_re x1, t_re x2, t_re x3, t_re x4)
 	t_vector4	v;
 
 	v.type = t;
-	v.x1 = x1;
-	v.x2 = x2;
-	v.x3 = x3;
-	v.x4 = x4;
+	v.e1 = x1;
+	v.e2 = x2;
+	v.e3 = x3;
+	v.e4 = x4;
 	v.err = 0;
 	return (v);
 }
 
 t_vector4		zero4(t_type4 t)
 {
-	return (create4(t, RE_ZER0, RE_ZER0, RE_ZER0, RE_ZER0));
+	return (create4(t, RE_ZERO, RE_ZERO, RE_ZERO, RE_ZERO));
 }
 
 t_vector4		one4(t_type4 t)
@@ -42,14 +42,14 @@ t_vector4		one4(t_type4 t)
 	return (create4(t, RE_ONE, RE_ONE, RE_ONE, RE_ONE));
 }
 
-t_vector2		unit2(t_type t)
+t_vector4		unit4(t_type4 t)
 {
-	return (create2(t, INV_SQRT_4, INV_SQRT_4, INV_SQRT_4, INV_SQRT_4));
+	return (create4(t, INV_SQRT_4, INV_SQRT_4, INV_SQRT_4, INV_SQRT_4));
 }
 
 t_vector4		vect4(t_re x1, t_re x2, t_re x3, t_re x4)
 {
-	return (create4(VECT4, x1, x2, x3, x4);
+	return (create4(VECT4, x1, x2, x3, x4));
 }
 
 t_vector4		quat4(t_re r, t_re i, t_re j, t_re k)
@@ -57,9 +57,9 @@ t_vector4		quat4(t_re r, t_re i, t_re j, t_re k)
 	return (create4(QUAT4, r, i, j, k));
 }
 
-t_vector2		poly3(t_re a3, t_re a2, t_re a1, t_re a0)
+t_vector4		poly3(t_re a3, t_re a2, t_re a1, t_re a0)
 {
-	return (create2(POLY2, a0, a1, a2, a3));
+	return (create4(POLY3, a0, a1, a2, a3));
 }
 
 t_vector4		color4(t_re r, t_re g, t_re b, t_re a)
@@ -72,7 +72,7 @@ t_vector4		mat2x2(t_re m00, t_re m01, t_re m10, t_re m11)
 	return (create4(MAT2x2, m00, m01, m10, m11));
 }
 
-t_vector4		box4(t_re x_min, t_re x_max, t_re y_min, t_re y_max);
+t_vector4		box4(t_re x_min, t_re x_max, t_re y_min, t_re y_max)
 {
 
 	if (x_min < x_max)
@@ -91,14 +91,35 @@ t_vector4		box4(t_re x_min, t_re x_max, t_re y_min, t_re y_max);
 	}
 }
 
+t_vector4		neg4(t_vector4 v)
+{
+	v.e1 = -v.e1;
+	v.e2 = -v.e2;
+	v.e3 = -v.e3;
+	v.e4 = -v.e4;
+	return (v);
+}
+
+t_vector4		inv4(t_vector4 v)
+{
+	v.e1 = RE_ONE / v.e1;
+	v.e2 = RE_ONE / v.e2;
+	v.e3 = RE_ONE / v.e3;
+	v.e4 = RE_ONE / v.e4;
+	return (v);
+}
+
 t_vector4		scalar4(t_vector4 v, t_re scalar)
 {
-	if (scalar == RE_ZER0)
+	t_vector4	tmp;
+
+	if (barely_zero(scalar))
 		return zero4(v.type);
-	else if (v.err != 0)
-		return err4();
-	return (create4(v.type,
-				scalar * v.r, scalar * v.i, scalar * v.j, scalar * v.k));
+
+	tmp = create4(v.type,
+					scalar * v.r, scalar * v.i, scalar * v.j, scalar * v.k);
+	tmp.err = v.err;
+	return (tmp);
 }
 
 t_vector4		add4(t_vector4 u, t_vector4 v)
@@ -140,9 +161,8 @@ t_vector4		mul4(t_vector4 u, t_vector4 v)
 {
 	t_vector4	mul;
 
-	if ((mul.err = (u.err || v.err || u.type != v.type)))
-		return err4();
-	else if (u.type == QUAT4)
+	mul.err = (u.err || v.err || u.type != v.type);
+	if (u.type == QUAT4)
 	{
 		mul.r = u.r * v.r - u.i * v.i - v.j * v.j - u.k * v.k;
 		mul.i = u.j * v.k - v.j * u.k + v.r * v.i + v.r * u.i;
@@ -162,9 +182,9 @@ t_vector4		mul4(t_vector4 u, t_vector4 v)
 		mul.g = u.g * v.g;
 		mul.b = u.b * v.b;
 		mul.a = u.a * v.a;
-		mul.err = (u.type != COLOR4);
+		mul.err |= (u.type != COLOR4);
 	}
-	mul.type = mul.err ? NONE4 : u.type;
+/*	mul.type = mul.err ? NONE4 : u.type;*/
 	return (mul);
 }
 
@@ -206,7 +226,7 @@ t_vector4		*normalize4(t_vector4 *v)
 
 t_re			prod4(t_vector4 a, t_vector4 b)
 {
-	return (a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w);
+	return (a.x * b.x + a.y * b.y + a.z * b.z + a.t * b.t);
 }
 
 int				cmp4(t_vector4 a, t_vector4 b)
@@ -230,31 +250,31 @@ int				cmpValues4(t_vector4 a, t_vector4 b)
 t_vector4		map4(t_vector4 v, double (*f)(double))
 {
 	return (create4(v.type, 
-			(t_re)(*f)((double)v.x1),
-			(t_re)(*f)((double)v.x2),
-			(t_re)(*f)((double)v.x3),
-			(t_re)(*f)((double)v.x4))
+			(t_re)(*f)((double)v.e1),
+			(t_re)(*f)((double)v.e2),
+			(t_re)(*f)((double)v.e3),
+			(t_re)(*f)((double)v.e4))
 			);
 }
 
 t_vector4		vect4e1()
 {
-	return (vect4(RE_ONE, RE_ZER0, RE_ZER0, RE_ZER0));
+	return (vect4(RE_ONE, RE_ZERO, RE_ZERO, RE_ZERO));
 }
 
 t_vector4		vect4e2()
 {
-	return (vect4(RE_ZER0, RE_ONE, RE_ZER0, RE_ZER0));
+	return (vect4(RE_ZERO, RE_ONE, RE_ZERO, RE_ZERO));
 }
 
 t_vector4		vect4e3()
 {
-	return (vect4(RE_ZER0, RE_ZER0, RE_ONE, RE_ZER0));
+	return (vect4(RE_ZERO, RE_ZERO, RE_ONE, RE_ZERO));
 }
 
 t_vector4		vect4e4()
 {
-	return (vect4(RE_ZER0, RE_ZER0, RE_ZER0, RE_ONE));
+	return (vect4(RE_ZERO, RE_ZERO, RE_ZERO, RE_ONE));
 }
 
 /*
